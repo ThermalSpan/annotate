@@ -1,0 +1,6 @@
+[package]
+name = "annotate"
+version = "0.1.0"
+authors = ["Russell Bentley <russell.w.bentley@icloud.com>"]
+
+[dependencies]
