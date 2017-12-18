@@ -3,4 +3,11 @@ name = "annotate"
 version = "0.1.0"
 authors = ["Russell Bentley <russell.w.bentley@icloud.com>"]
 
+[dependencies.clap]
+version = "2.26.0"
+default_features = false
+features = [ "suggestions", "color"]
+
 [dependencies]
+error-chain = "0.11.0"
+regex = "0.2.3"

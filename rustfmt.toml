@@ -1,0 +1,17 @@
+tab_spaces = 4
+newline_style = "Unix"
+fn_brace_style = "PreferSameLine"
+item_brace_style = "PreferSameLine"
+fn_args_layout = "Block"
+fn_args_density = "Vertical"
+fn_call_style = "Block"
+struct_trailing_comma = "Always"
+struct_lit_trailing_comma = "Always"
+struct_lit_style = "Block"
+enum_trailing_comma = true
+report_todo = "Always"
+report_fixme = "Always"
+reorder_imports = true
+reorder_imported_names = true
+wrap_comments = true
+match_block_trailing_comma = true
