@@ -5,7 +5,7 @@ extern crate regex;
 
 mod args_and_usage;
 
-use regex::{RegexSetBuilder, escape};
+use regex::{Regex, escape};
 use std::fs;
 use std::fs::File;
 use std::io::{BufRead, BufReader, BufWriter, Write};
@@ -54,9 +54,11 @@ fn run() -> Result<()> {
         }
     }
 
-    let regex = RegexSetBuilder::new(&expressions)
-		.size_limit(4294967000)
-		.build()?;
+    let mut regexes = Vec::new();
+    for expression in expressions {
+        let regex = Regex::new(&expression)?;
+        regexes.push(regex);
+    }
 
     for input_file in args.input_files {
 
@@ -90,15 +92,16 @@ fn run() -> Result<()> {
                 format!("Unable to read line from: {}", orig_path.display())
             })?;
 
-            if regex.is_match(&line) {
-                writer.write(&args.marker.as_bytes())?;
+            for regex in &regexes {
+                if regex.is_match(&line) {
+                    writer.write(&args.marker.as_bytes())?;
+                    break;
+                }
             }
 
             writer.write(&line.as_bytes())?;
 
             writer.write("\n".as_bytes())?;
-
-            expressions.push(escape(&line));
         }
 
 
