@@ -5,7 +5,7 @@ extern crate regex;
 
 mod args_and_usage;
 
-use regex::{RegexSet, escape};
+use regex::{RegexSetBuilder, escape};
 use std::fs;
 use std::fs::File;
 use std::io::{BufRead, BufReader, BufWriter, Write};
@@ -54,7 +54,9 @@ fn run() -> Result<()> {
         }
     }
 
-    let regex = RegexSet::new(&expressions)?;
+    let regex = RegexSetBuilder::new(&expressions)
+		.size_limit(4294967000)
+		.build()?;
 
     for input_file in args.input_files {
 
